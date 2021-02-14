@@ -24,6 +24,11 @@ STUDENT = {
         "fname": "Ayoola",
         "lname": "Makinde",
         "timestamp": get_timestamp()
+    },
+    "Ibk": {
+        "fname": "Ibk",
+        "lname": "Oshilagun",
+        "timestamp": get_timestamp()
     }
 }
 # Create a handler for our read (GET) people
