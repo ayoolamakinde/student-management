@@ -2,133 +2,33 @@ swagger: "2.0"
 info:
   description: This is the swagger file that goes with our server code
   version: "1.0.0"
-  title: Swagger ReST Article
+  title: Swagger REST Article
 consumes:
-  - application/json
+  - "application/json"
 produces:
-  - application/json
+  - "application/json"
 
-basePath: /api
+basePath: "/api"
 
 # Paths supported by the server application
 paths:
-  /course:
+  /student:
     get:
-      operationId: course.read_all
+      operationId: "student.read"
       tags:
-        - course
-      summary: Read the entire list of course
-      description: Read the list of course
-      parameters:
-        - name: length
-          in: query
-          type: integer
-          description: Number of course to get from course
-          required: false
-        - name: offset
-          in: query
-          type: integer
-          description: Offset from beginning of list where to start gathering course
-          required: false
+        - "student"
+      summary: "The student data structure supported by the server application"
+      description: "Read the list of student"
       responses:
         200:
-          description: Successfully read course list operation
+          description: "Successful read student list operation"
           schema:
-            type: array
+            type: "array"
             items:
               properties:
-                coursename:
-                  type: string
-                lecturername:
-                  type: string
+                fname:
+                  type: "string"
+                lname:
+                  type: "string"
                 timestamp:
-                  type: string
-
-    post:
-      operationId: course.create
-      tags:
-        - course
-      summary: Create a person and add it to the course list
-      description: Create a new person in the course list
-      parameters:
-        - name: person
-          in: body
-          description: Person to create
-          required: True
-          schema:
-            type: object
-            properties:
-              coursename:
-                type: string
-                description: First name of person to create
-              lecturername:
-                type: string
-                description: Last name of person to create
-      responses:
-        201:
-          description: Successfully created person in list
-
-  /course/{lecturername}:
-    get:
-      operationId: course.read_one
-      tags:
-        - course
-      summary: Read one person from the course list
-      description: Read one person from the course list
-      parameters:
-        - name: lecturername
-          in: path
-          description: Last name of the person to get from the list
-          type: string
-          required: True
-      responses:
-        200:
-          description: Successfully read person from course list operation
-          schema:
-            properties:
-              coursename:
-                type: string
-              lecturername:
-                type: string
-              timestamp:
-                type: string
-
-    put:
-      operationId: course.update
-      tags:
-        - course
-      summary: Update a person in the course list
-      description: Update a person in the course list
-      parameters:
-        - name: lecturername
-          in: path
-          description: Last name of the person to update in the list
-          type: string
-          required: True
-        - name: person
-          in: body
-          schema:
-            type: object
-            properties:
-              coursename:
-                type: string
-              lecturername:
-                type: string
-      responses:
-        200:
-          description: Successfully updated person in course list
-
-    delete:
-      operationId: course.delete
-      tags:
-        - course
-      summary: Delete a person from the course list
-      description: Delete a person
-      parameters:
-        - name: lecturername
-          in: path
-          type: string
-          required: True
-      responses:
-        200:
-          description: Successfully deleted a person from course list
+                  type: "string"
