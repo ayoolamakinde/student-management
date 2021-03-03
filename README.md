@@ -1,3 +1,3 @@
 # student-management
 
-THIS IS JUST A TEST
+Simple student management API to play with ECS
