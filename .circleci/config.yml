@@ -1,18 +1,35 @@
 version: 2.1
 
 orbs:
-  aws-ecr: circleci/aws-ecr@6.7.0
+  aws-ecr: circleci/aws-ecr@0.0.4
 
 workflows:
-  build_and_push_image:
+  build_test_deploy:
     jobs:
-      - aws-ecr/build-and-push-image:
-          account-url: AWS_ECR_ACCOUNT_URL
-          aws-access-key-id: AWS_ACCESS_KEY_ID
-          aws-secret-access-key: AWS_SECRET_ACCESS_KEY
-          create-repo: true
-          dockerfile: Dockerfile
-          path: .
+      - build_test
+
+      - aws-ecr/build_and_push_image:
           region: AWS_DEFAULT_REGION
+          account-url: ${AWS_ECR_ACCOUNT_URL}
           repo: student-management-ecr
           tag: "$CIRCLE_SHA1"
+          requires:
+            - build_test
+jobs:
+  build_test:
+    docker:
+      - image: circleci/python:2.7.14
+    steps:
+      - checkout
+      - run:
+          name: Setup VirtualEnv
+          command: |
+            virtualenv helloworld
+            . helloworld/bin/activate
+            pip install --no-cache-dir -r requirements.txt
+            pip install --no-cache-dir connexion[swagger-ui]
+      - run:
+          name: Run Tests
+          command: |
+            . helloworld/bin/activate
+            python /test/unit_test_template.py
