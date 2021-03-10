@@ -1,16 +1,22 @@
 import unittest
 import requests
-import server
 
 class playTest(unittest.TestCase):
 
-    def setUp(self):
-        self.app = server.app.test_client()
-        self.app.testing = True
+    #this is just to include a test in the CI/CD pipeline for the purpose of CI/CD
+    #tutoring
+    def test_home(self):
+        response = requests.get("http://facebook.com")
+        assert response.status_code == 200
 
-    def test_status_code(self):
-        response = self.app.get('/')
-        self.assertEqual(response.status_code, 200)
+    def test_upper(self):
+        self.assertEqual('foo'.upper(), 'FOO')
+
+    def test_isupper(self):
+        self.assertTrue('FOO'.isupper())
+        self.assertFalse('Foo'.isupper())
+
+
 
 if __name__ == '__main__':
     unittest.main()
