@@ -1,17 +1,16 @@
 import unittest
 import requests
+import server
 
 class playTest(unittest.TestCase):
 
+    def setUp(self):
+        self.app = server.app.test_client()
+        self.app.testing = True
 
-    def test_get(self):
-        response = requests.get("http://0.0.0.0:8080/")
-        assert response.status_code == 200
-
-    def test_delete(self):
-        response = requests.delete("http://0.0.0.0:8080/api/student/Easter")
-        assert response.status_code == 200
-
+    def test_status_code(self):
+        response = self.app.get('/')
+        self.assertEqual(response.status_code, 200)
 
 if __name__ == '__main__':
     unittest.main()
