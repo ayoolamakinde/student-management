@@ -32,4 +32,4 @@ jobs:
           name: Run Tests
           command: |
             . helloworld/bin/activate
-            python unit_test_template.py
+            ls
