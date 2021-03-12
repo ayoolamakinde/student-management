@@ -3,8 +3,7 @@ import requests
 
 class playTest(unittest.TestCase):
 
-    #this is just to include a test in the CI/CD pipeline for the purpose of CI/CD
-    #tutoring
+    #this is just to include a test in the CI/CD pipeline for the purpose of CI/CD tutoring
     def test_home(self):
         response = requests.get("http://facebook.com")
         assert response.status_code == 200
